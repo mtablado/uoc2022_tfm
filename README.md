@@ -27,3 +27,8 @@ Alternative 2: Not do an autoencoder but do a classification network to predict 
 Use existing MRI autoncoders as a starting point - we don't need to come up with something new, but we might try different architectures and find the optimal architecture and maybe modify an existing one to make it better.
 
 Check AdrianArnaiz github repo (previous student doing the project)
+
+References:
+
+ - StRegA: Unsupervised Anomaly Detection in Brain MRIs using a Compact Context-encoding Variational Autoencoder https://arxiv.org/pdf/2201.13271.pdf
+ - https://www.datacamp.com/tutorial/reconstructing-brain-images-deep-learning
