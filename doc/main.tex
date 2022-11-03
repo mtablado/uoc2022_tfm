@@ -1,0 +1,72 @@
+\documentclass[11pt,a4paper,openany]{book}
+
+
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+
+\usepackage{hyperref}
+
+\usepackage[utf8]{inputenc}
+
+
+
+\begin{document}
+\input{0_tittle.tex}
+
+
+\tableofcontents
+
+%%%%%%%%%%%%%
+%%% FICHA %%%
+%%%%%%%%%%%%%
+\chapter*{FICHA DEL TRABAJO FINAL}
+\begin{table}[ht]
+	\centering{}
+	\renewcommand{\arraystretch}{2}
+	\begin{tabular}{r | l}
+		\hline
+		Título del trabajo: & Artificial MRI brain images creation with Variational Autoencoders\\
+		\hline
+        Nombre del autor: & Miguel Tablado León\\
+		\hline
+        Nombre del Tutor/a de TF: & Baris Kanber\\
+		\hline
+        Nombre del/de la PRA: & Baris Kanber\\
+		\hline
+        Fecha de entrega: & 02/2023\\
+		\hline
+        Titulación o programa: & Máster en Ciencia de Datos\\
+		\hline
+        Área del Trabajo Final: & Area Medicina (TFM-Med)\\
+		\hline
+        Language: & English\\
+		\hline
+        Keywords & Deep Learning, Brain MRI, Variational Autoencoder\\
+		\hline
+	\end{tabular}
+\end{table}
+
+\chapter*{\centering Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+\begin{quote}
+    {Artificial Intelligence is set to be key technology at medicine projects in where models will help doctors at diagnostics with image processing. Magnetic Resonance Images allow doctors to scan brains and create a images that can be used for training models. However, it is too expensive and slow to be able to create large dataset required for models to work at highest accuracy and this project aims to create artificial brain MR images that would enlarge the base dataset combining with real images.
+    
+    A potential use case in where AI-generated images could be used are anomaly detection by comparing an input image with healthy images to detect if it presents any anomaly to be analyzed by a doctor.
+    
+    During this project Variational Autoencoders will be used in order to create new images where different existing network architectures will be analyzed before working on the performance tuning with the one which brings better results at initial analysis.
+    
+    The duration of the project implementation will start on October 24th and will end up by December 25th with one Data Scientist working on the project with a budget of 300 hours that will be distributed during that frame and that will require GPU computation for processing the different training and testing networks.
+    
+    This project aims to be a Proof of Concept and the resulting images will be visually analyzed and compared to real images to check if the network is able to generate images that could be used as valid images.}
+\end{quote}
+
+\chapter{Introduction}
+
+\input{introduction/1_context.tex}
+\input{introduction/2_aim.tex}
+\input{introduction/5_plan.tex}
+
+
+
+\end{document}
