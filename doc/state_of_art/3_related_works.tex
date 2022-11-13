@@ -1,20 +1,20 @@
-\section*{Related Works}
+\section{Related Works}
 
-In July 2021, Jorge Cardoso published an article describing how 3-D MRI images were created using AI models for diagnosis and prediction of diseases on brains by using a supercomputer called Cambridge-1 and Vector-Quantized Variational Autoencoders (VQ-VAE)
+In July 2021, Jorge Cardoso published an article \cite{jcardoso} describing how 3-D MRI images were created using AI models for diagnosis and prediction of diseases on brains by using a supercomputer called Cambridge-1 and \Acrfull{vqvae}
 
 \begin{figure}[ht]
     \hspace*{-0.8in}
     \centering
     \includegraphics[width = 16cm, height = 6cm]{images/vqvae.png}
-    \caption[]{VQ-VAE Proposed Approach by Marimont and Tarroni}
+    \caption[]{\Acrshort{vqvae} Proposed Approach by Marimont and Tarroni}
     \label{fig:vqvae}
 \end{figure}
 
-More recently, In September 2022, Soumick et al. published a paper on how a pipeline (called StRegA) with specific pre-processing and post-processing functions outperformed the Context-Encoder VAE (ceVAE) architectures on unsupervised anomaly detection in brain MRIs.
+More recently, In September 2022, Soumick et al. \cite{soumick} published a paper on how a pipeline (called \Acrshort{strega}) with specific pre-processing and post-processing functions outperformed the \Acrfull{cevae} architectures on unsupervised anomaly detection in brain MRIs.
 
-While Cardoso describes how a supercomputer with 100 GPUs (and other high-quality features) was employed to create MRI brain images across ages, genders and diseases which allows to not only diagnose but to predict diseases, StRegA describes how adding pre and post processing steps to the network architecture on regular computers improves results compared to bare VAE network architectures.
+While Cardoso describes how a supercomputer with 100 GPUs (and other high-quality features) was employed to create MRI brain images across ages, genders and diseases which allows to not only diagnose but to predict diseases, \Acrshort{strega} describes how adding pre and post processing steps to the network architecture on regular computers improves results compared to bare VAE network architectures.
 
-Soumick et al. explains in detail why the unsupervised learning is needed in the field by mainly comparing with supervised learning and by emphasizing its properties. The paper highlights the following list of reasons to justify the usage unsupervised learning:
+Soumick et al. \cite{soumick} explains in detail why the unsupervised learning is needed in the field by mainly comparing with supervised learning and by emphasizing its properties. The paper highlights the following list of reasons to justify the usage unsupervised learning:
 
 \begin{itemize}
     \item Supervised learning relies on the quality and quantity of data, ranging from thousands to millions of labeled data which is a laborious manual annotation work.
@@ -26,6 +26,6 @@ Soumick et al. explains in detail why the unsupervised learning is needed in the
     \item Unsupervised Anomaly Detection is useful for anomalies detection when their manifestation is not known or are very rare; making it difficult to create a large dataset for supervised learning
 \end{itemize}
 
-The StRegA pipeline used for unsupervised anomaly detection used a compact version of the ceVAE (cceVAE) combined with pre and post processors (creating a pipeline) which outperformed VAEs working alone. However, those achievements are only relevant to this project since they have been worked with the same MRI brain images (on a different dataset, BraTS vs IXI), hence it demonstrates that VAEs are optimal for MRI Brain images processing.
+The \Acrshort{strega} pipeline used for unsupervised anomaly detection used a compact version of the \acrshort{cevae} (cceVAE) combined with pre and post processors (creating a pipeline) which outperformed VAEs working alone. However, those achievements are only relevant to this project since they have been worked with the same MRI brain images (on a different dataset, BraTS vs IXI), hence it demonstrates that VAEs are optimal for MRI Brain images processing.
 
 In conclusion, the state-of-the-art shows that VAEs have been implemented in combination with supercomputers to create models for diagnosis and prediction of brain diseases using 3-D MRI datasets and that the AI community is looking for cheaper and affordable implementations by innovating new VAE architectures or combining VAEs with pre and post processing actions.
