@@ -1,15 +1,13 @@
 \documentclass[11pt,a4paper,openany]{book}
 
-
 \usepackage{amsmath}
-
 \usepackage{graphicx}
-
 \usepackage{hyperref}
-
 \usepackage[utf8]{inputenc}
+\usepackage[acronym, toc]{glossaries}
 
-
+\makeglossaries
+\input{closing/glossary.tex}
 
 \begin{document}
 \input{0_tittle.tex}
@@ -68,5 +66,12 @@
 \input{introduction/5_plan.tex}
 
 \input{state_of_art/main.tex}
+
+\clearpage
+\printglossary[type=\acronymtype]
+\printglossary
+
+\bibliographystyle{plain} % We choose the "plain" reference style
+\bibliography{refs}
 
 \end{document}
