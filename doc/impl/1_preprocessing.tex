@@ -1,0 +1,65 @@
+\section{Analysis of MRI images dataset}
+\subsubsection*{MRI and the NIFTI file format}
+\subsubsection*{MRI and the NIFTI file format}
+Describe images and dataset: During this activity, a description of the dataset will be generated with a view of the quality of the dataset for the aim of the project and any findings which could result.
+\subsubsection*{Loading images}
+Extract 2D images: Load 3D images and extract 2D slices from the original dataset, which will be depicted with code.
+
+The NIFTI protocol stores the 3D 
+
+After loading NIFTI images with the nibabel library \dots
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 10cm, height = 6cm]{images/3-axis.png}
+    \caption[]{Coronal, Axial and Sagittal images}
+    \label{fig:3-axis}
+\end{figure}
+
+Images are loaded in the following shape:
+
+\begin{itemize}
+    \item 256 Coronal or trasversal plane 
+    \item 256 Axial or horizontal plane
+    \item 130 Sagittal
+\end{itemize}
+
+In order to isolate image loading from model training into different steps, selected 2D images are stored in \acrshort{png} format after being pre-processed. 
+
+The images are stored in 2 different directories spliting the dataset into 90\% for training and 10\% for test subsets resulting in 16.268 and 1.162 images respectively.
+
+\subsubsection*{Data Pre-processing and Data Augmentation}
+
+Different pre-processing and data augmentation techniques were briefly evaluated to decide wheter they would improve the model's results. The following table shows the decisions made on each evaluated technique:
+
+\begin{table}
+    \centering
+    \begin{tabular}{p{3cm}|p{2cm}|p{6cm}}
+        \hline
+        Technique & Decision & Justification \\
+        \hline
+        Gray scale & Approved & Applying gray scale to scans seems a natural choice and is usually applied on image processing \\
+        Rescaling & Approved & Rescaling \acrshort{rgb} values from 0-256 to 0-1 that can be better handled by the model  \\
+        Pixel & Approved & Down-pixeling images from 256 to 128 which requires much less resources and wouldn't lose much quality \\
+        Shear Intensity & Declined & Slanting images would distort the latent space leading to create distorted artificial images \\
+        Shifts and Rotation & Declined & Similar to shear intensity shifting
+            images is seen as a method not accurate for MRI processing as NIFT 
+            images will not appear shifted in any prediction phase \\
+        Add Noise & Declined & Adding noise is interesting for improving results and key to allow model transfering to other datasets obtained with different scanners and their settings or image quality. It was declined due to time constraints. \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+
+
+It was concluded that some of them could badly interfere into the latent space representation. For example,  
+Due to time constraint other data augmentation techniques were not implemented.
+
+\begin{enumerate}
+    \item Gain knowledge on MRI and the NIFTI file format: This activity consists of reading papers and documents to gain sufficient knowledge to execute the project. There is no need to become an expert on the matter but understanding how those files are and how to process them.
+    \item 
+    \item 
+    \item Pre-processing images: Decide which transformations on the 2D images would help the project like pixel changes or applying gray-scale transformations.
+\end{enumerate}
+
