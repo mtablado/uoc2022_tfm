@@ -24,9 +24,37 @@ Images are loaded in the following shape:
     \item 130 Sagittal
 \end{itemize}
 
-In order to isolate image loading from model training into different steps, selected 2D images are stored in \acrshort{png} format after being pre-processed. 
+\subsubsection*{Deciding what slices to use}
 
-The images are stored in 2 different directories spliting the dataset into 90\% for training and 10\% for test subsets resulting in 16.268 and 1.162 images respectively.
+Looking at the three different slices in Figure \ref{fig:3-axis}, it is obvious that images have not been processed to show only the brain. The aim of the project is to create artificial brain images, not head images. A model that would learn head images would require much more time and resources than for learning just the brain (which is not a an easy task at all either).
+
+While observing the BraTS \cite{brats} challenge dataset and project description, the skull stripping concept arise. Before publishing the dataset, slices are processed to remove anything that does not pertain to brain. 
+
+This project cannot afford such implementation within the project scope. So, when deciding what slices to use, it became the only decision factor. It happened to be that the rest of considerations where just debatable. 
+
+In conclusion, the noise that bones, eyes and the rest of the items visible in coronal and sagittal axis look very high compared to the axial slices in where, properly selected, slices will only show a surrounding skull bone.
+
+Once that the axial slices were chosen, a sample of brain scans were visually analyzed to find a range of slices that could be used.
+
+The range must exclude as much non-brain pixels as possible while and that happens using the range that goes from above eyes to the top.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 10cm, height = 6cm]{images/nifti-slice160.png}
+    \caption[]{In red, slice 160 as bottom delimiter}
+    \label{fig:slice160}
+\end{figure}
+
+Also, the slices closer to the top were also discarded to avoid higher heterogeneity on brain images and sizes.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 10cm, height = 6cm]{images/nifti-slice190.png}
+    \caption[]{In red, slice 190 as top delimiter}
+    \label{fig:slice190}
+\end{figure}
+
+It can be interpreted that 3D images are in use since 30 slices of each brain are used which constitue a 3D section of a brain. But, similarly, it could be interpreted that each and every slice of those 30 could happen to be data augmentation or different people with very similar brains.
 
 \subsubsection*{Data Pre-processing and Data Augmentation}
 
@@ -50,6 +78,11 @@ Different pre-processing and data augmentation techniques were briefly evaluated
     \end{tabular}
 \end{table}
 
+\subsubsection*{Storing data}
+
+In order to isolate image loading from model training into different steps, selected 2D images are stored in \acrshort{png} format after being pre-processed. 
+
+The images are stored in 2 different directories spliting the dataset into 90\% for training and 10\% for test subsets resulting in 16.268 and 1.162 images respectively.
 
 
 
