@@ -6,15 +6,19 @@ From the different AI fields, computer vision is maybe the most popular one and 
 
 Image processing is intuitively matched with medical diagnosis by anyone having or not any expertise on the field. Every single citizen will have heard of magnetic resonance imaging, and anyone easily transposes ‘cat detection’ to ‘anomaly detection’, being the anomaly a tumor or anything else.
 
-There are different techniques to scan people and create images for clinical diagnosis like X-Ray or Magnetic Resonance Imaging. In this project, we will work with Magnetic Resonance Images (MRI) which are images created by a machine with a large bore that scans people lying inside it. The MR technique is non-invasive, it produces no radiation, and is used to scan almost any part of the body from which we will focus on brain images.
+There are different techniques to scan people and create images for clinical diagnosis like X-Ray or Magnetic Resonance Imaging. In this project, we will work with Magnetic Resonance Images (MRI) which are images created by a machine with a large bore that scans people lying inside it. The MR technique is non-invasive, it produces no radiation, and is used to scan almost any part of the body from which this thesis will focus on brain images.
 
-Combining AI diagnosis capabilities on image processing and MRI images, we can think of helping doctors to identify the presence of anomalies or looking for concrete diagnosis for a specific disease.
+Combining AI diagnosis capabilities on image processing and MRI images, you can think of helping doctors to identify the presence of anomalies or looking for concrete diagnosis for a specific disease.
 
-Obviously, these projects are not easy at all and they face a lot of challenges. One of the first challenges that such AI project faces is the difficulty to obtain a large set of brain images that are needed to train an accurate AI model. Scanning people is too costly and requires a lot of time. and the challenge of having a large dataset gets harder once we understand that brain images may differ depending on age or gender.
+Obviously, these projects are not easy at all and they face a lot of challenges. One of the first challenges that such AI project faces is the difficulty to obtain a large set of brain images that are needed to train an accurate AI model. Scanning people is too costly and requires a lot of time and the challenge of having a large dataset gets harder once we understand that brain images may differ depending on age or gender.
 
 Today, there is a clear limitation on how to reproduce or obtain healthy brain images for AI-based diagnosis projects while the appearance of new AI techniques known as Autoencoders and Variational Autoencoders introduces a new area of investigation to mitigate the gap.
 
 This project aims to be a proof of concept to create AI-created images with new variational autoencoders that would serve to augment any existing MRI dataset and that will help to improve the accuracy of brain anomaly detection projects, including those which could be used for overall anomaly detection to others more specific which would help on concrete disease diagnosis.
+
+When submitted, Dr Baris Kanber's thesis proposal was intended to use Autoencoders for MRI reconstruction of images. However, some alternatives were propopsed by him during the first presentation meeting to go beyond that. Dr Baris Kanber suggested to use Variational Autoencoders first, then varying the project objective to create new artificial images instead of recreating them by using the latent space probability distributions. Both proposals were taken with even when more research and experiments would be needed due to the lack of previous projects using this technique.
+
+Variational Autoencoders are seen as an evolution of Autoencoders which store discrete values of each attribute in the latent space while VAEs uses probability distributions. This will be described deeper later in this document. 
 
 Personal motivation comes from various angles:
 

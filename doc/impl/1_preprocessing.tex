@@ -1,11 +1,13 @@
-\section{Analysis of MRI images dataset}
-\subsubsection*{MRI and the NIFTI file format}
-\subsubsection*{MRI and the NIFTI file format}
-Describe images and dataset: During this activity, a description of the dataset will be generated with a view of the quality of the dataset for the aim of the project and any findings which could result.
+\section{Phase 1: Analysis of MRI images dataset}
+
+\subsubsection*{NIFTI protocol}
+
+The NIFTI protocol stores the MRI scan images in 3D format with spatial information that allows the doctors to analyze images knowing the orientation along with some other metadata. Data is stored in vector-based fashion with voxel information.
+
+This project is using the \cite{nibabel} library to load and process MRI images from nifti files. The library loads nifti files and retrieves an in-memory object with the image data containing slices in a 3-dimensional array. Accessing slices is then as easy as using the three indexes in the array, where you can easily get a slice by using the slice number from your chosen axis.
+
 \subsubsection*{Loading images}
 Extract 2D images: Load 3D images and extract 2D slices from the original dataset, which will be depicted with code.
-
-The NIFTI protocol stores the 3D 
 
 After loading NIFTI images with the nibabel library \dots
 
@@ -19,24 +21,31 @@ After loading NIFTI images with the nibabel library \dots
 Images are loaded in the following shape:
 
 \begin{itemize}
-    \item 256 Coronal or trasversal plane 
-    \item 256 Axial or horizontal plane
-    \item 130 Sagittal
+    \item 256 slices of Coronal or trasversal plane 
+    \item 256 slices of Axial or horizontal plane
+    \item 130 slices of Sagittal
 \end{itemize}
 
 \subsubsection*{Deciding what slices to use}
 
-Looking at the three different slices in Figure \ref{fig:3-axis}, it is obvious that images have not been processed to show only the brain. The aim of the project is to create artificial brain images, not head images. A model that would learn head images would require much more time and resources than for learning just the brain (which is not a an easy task at all either).
+Looking at the three different slices in Figure \ref{fig:3-axis}, it is obvious that images have not been processed to show only the brain but the whole skull. The aim of the project is to create artificial brain images, not head ones. A model that would learn head images would require much more time and resources than for learning just the brain (which is not an easy task at all either).
 
-While observing the BraTS \cite{brats} challenge dataset and project description, the skull stripping concept arise. Before publishing the dataset, slices are processed to remove anything that does not pertain to brain. 
+While observing the BraTS \cite{brats} challenge dataset and project description, the skull stripping concept arise. Skull stripping consists on removing anything that does not pertain to brain or, in other words, extract the brain from the skull. 
 
-This project cannot afford such implementation within the project scope. So, when deciding what slices to use, it became the only decision factor. It happened to be that the rest of considerations where just debatable. 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 10cm, height = 6cm]{images/skull-stripped.png}
+    \caption[]{Skull stripped image example; Source: Analytics Vidhya \cite{skullstripping} }
+    \label{fig:skullstripped}
+\end{figure}
+
+This project cannot afford such implementation within the project scope. So, when deciding what slices to use, it became the only decision factor. It happened to be that the rest of considerations where just debatable and clearly much less important.
 
 In conclusion, the noise that bones, eyes and the rest of the items visible in coronal and sagittal axis look very high compared to the axial slices in where, properly selected, slices will only show a surrounding skull bone.
 
 Once that the axial slices were chosen, a sample of brain scans were visually analyzed to find a range of slices that could be used.
 
-The range must exclude as much non-brain pixels as possible while and that happens using the range that goes from above eyes to the top.
+Figure \ref*{fig:slice160} shows a red line which bottom-up delimits  the range that goes from above the eyes to the top which is the range that excludes as much non-brain pixels as possible
 
 \begin{figure}[ht]
     \centering
@@ -45,7 +54,7 @@ The range must exclude as much non-brain pixels as possible while and that happe
     \label{fig:slice160}
 \end{figure}
 
-Also, the slices closer to the top were also discarded to avoid higher heterogeneity on brain images and sizes.
+Also, the slices closer to the top were also discarded to avoid higher heterogeneity on brain images (size and content). See Figure \ref*{fig:slice190}.
 
 \begin{figure}[ht]
     \centering
@@ -58,7 +67,11 @@ It can be interpreted that 3D images are in use since 30 slices of each brain ar
 
 \subsubsection*{Data Pre-processing and Data Augmentation}
 
-Different pre-processing and data augmentation techniques were briefly evaluated to decide wheter they would improve the model's results. The following table shows the decisions made on each evaluated technique:
+Different pre-processing and data augmentation techniques were briefly evaluated to decide wheter if they would improve the model's results or not. Table \ref{table:preprocessing} shows the decisions made on each evaluated technique.
+
+Overall, pre-processing actions that were feasible to implement in a timely manner were approved while those that could risk the project plan were discarded.
+
+Also, data augmentation techniques that could result on unpredictable latent space results were initially discarded to be re-evaluated at a future work when the first results and conclusions would be available.
 
 \begin{table}
     \centering
@@ -68,31 +81,21 @@ Different pre-processing and data augmentation techniques were briefly evaluated
         \hline
         Gray scale & Approved & Applying gray scale to scans seems a natural choice and is usually applied on image processing \\
         Rescaling & Approved & Rescaling \acrshort{rgb} values from 0-256 to 0-1 that can be better handled by the model  \\
-        Pixel & Approved & Down-pixeling images from 256 to 128 which requires much less resources and wouldn't lose much quality \\
+        Pixeling & Approved & Down-pixeling images from 256 to 128 which requires much less resources and without losing much quality \\
         Shear Intensity & Declined & Slanting images would distort the latent space leading to create distorted artificial images \\
-        Shifts and Rotation & Declined & Similar to shear intensity shifting
-            images is seen as a method not accurate for MRI processing as NIFT 
-            images will not appear shifted in any prediction phase \\
+        Shifts and Rotation & Declined & Similar to shear intensity shifting images is seen as a method not accurate for MRI processing as MRI images will not appear shifted in any prediction phase \\
         Add Noise & Declined & Adding noise is interesting for improving results and key to allow model transfering to other datasets obtained with different scanners and their settings or image quality. It was declined due to time constraints. \\
         \hline
     \end{tabular}
+    \caption{Pre-processing techniques decissions table}
+    \label{table:preprocessing}
 \end{table}
+
+% To place the table.
+\newpage
 
 \subsubsection*{Storing data}
 
-In order to isolate image loading from model training into different steps, selected 2D images are stored in \acrshort{png} format after being pre-processed. 
+In order to separate image loading from model training into different steps, selected 2D images are stored in \acrshort{png} format after being pre-processed. 
 
 The images are stored in 2 different directories spliting the dataset into 90\% for training and 10\% for test subsets resulting in 16.268 and 1.162 images respectively.
-
-
-
-It was concluded that some of them could badly interfere into the latent space representation. For example,  
-Due to time constraint other data augmentation techniques were not implemented.
-
-\begin{enumerate}
-    \item Gain knowledge on MRI and the NIFTI file format: This activity consists of reading papers and documents to gain sufficient knowledge to execute the project. There is no need to become an expert on the matter but understanding how those files are and how to process them.
-    \item 
-    \item 
-    \item Pre-processing images: Decide which transformations on the 2D images would help the project like pixel changes or applying gray-scale transformations.
-\end{enumerate}
-
