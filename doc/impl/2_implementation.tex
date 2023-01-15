@@ -43,9 +43,9 @@ As introduced in \ref*{sec:imploverview} overview section, some deviations from 
 
 Several calculation formulas for KL-Divergence were tested with little result changes (they are commented in at source file). 
 
-The best model accuracy comes at maximizing the ELBO, which happens when you minimize both reconstruction loss and KL\-Divergence.
+The best model accuracy comes at maximizing the \acrfull*{elbo}, which happens when you minimize both reconstruction loss and KL-Divergence.
 
-Despite the KL-Divergence issue, the ELBO improves in each step thanks to the higher minimization of the reconstruction loss
+Despite the KL-Divergence issue, the \acrshort*{elbo} improves in each step thanks to the higher minimization of the reconstruction loss
 
 \begin{equation}
     \left\lvert Reconstruction Loss_i - Reconstruction Loss_{i-1} \right\rvert > \left\lvert KL Divergence_i - KL Divergence_{i-1} \right\rvert
@@ -66,8 +66,7 @@ The source code of this section can be found at \href{https://github.com/mtablad
     \label{fig:vqvaearch}
 \end{figure}
 
-As VAE, \acrshort*{vqvae} use \acrshort*{cnn} but, in this case, the encoder generates a set of vectors with discrete representations (instead of continuous like VAE)  that is 
-During training phase VQ-VAE creates a codebook of vectors which are also learnable and predictable. Once that a new image is processed, the encoder output vector of z is compared with the codebook vectors and the one closer to it is used later as the input of the decoder. Proximity between vectors is calculated with the L2-norm.
+As VAE, \acrshort*{vqvae} use \acrshort*{cnn} but, in this case, the encoder generates a set of vectors with discrete representations (instead of continuous like VAE). During training phase VQ-VAE creates a codebook of vectors which are also learnable and predictable. Once that a new image is processed, the encoder output vector of z is compared with the codebook vectors and the one closer to it is used later as the input of the decoder. Proximity between vectors is calculated with the L2-norm.
 
 The resulting indexes are stored into a set that then serves as the indexing object to build a new set of vectors that will be used as decoder input.
 
@@ -104,7 +103,7 @@ Figure \ref{fig:cnndecoderoutput} shows the decoder model summary output after c
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width = 14cm, height = 8cm]{images/cnn-encoder-output.png}
+    \includegraphics[width = 14cm, height = 8cm]{images/cnn-decoder-output.png}
     \caption[CNN Decoder model summary output]{CNN Decoder model summary output}
     \label{fig:cnndecoderoutput}
 \end{figure}
@@ -129,9 +128,12 @@ Both of the above-described VAE and VQ-VAE models use this network architecture 
     \label{fig:cnnvqvaeencoderoutput}
 \end{figure}
 
+% Make sure floats (figures) are placed before new section
+\FloatBarrier
+
 \subsubsection{Hidden Layers}
 
-As described in this section, the implemented \acrshort{cnn} is based on Context-encoding Variational Autoencoder for Unsupervised Anomaly Detection paper \cite{cevaemodel} in where Zimmerer et al. describe it as: 
+As described, the implemented \acrshort{cnn} is based on Context-encoding Variational Autoencoder for Unsupervised Anomaly Detection paper \cite{cevaemodel} in where Zimmerer et al. describe it as: 
 
 \begin{quote}
     For the encoder and decoder networks, we chose fully convolutional networks with five 2D-Conv-Layers and 2D-Transposed-Conv-Layers respectively with CoordConv, kernel size 4 and stride 2, each layer followed by a Leaky-ReLU non-linearity. The encoder and decoder are symmetric with 16, 64, 256, 1024 feature maps and a latent variable size of 1024
@@ -157,7 +159,7 @@ When working with large image datasets data cannot be loaded in memory and then 
 
 To do so, Keras provides the \href{https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator#flow_from_directory}{Flow from directory} method which allows you to configure data loading parameters and several pre-processing actions.
 
-Once configured, the flow from directory method retrieves an iterator object, which is passed to the model which will invoke it to get the next batch of images when needed during the training steps in each epoch.
+Once configured, the flow from directory method retrieves an iterator object, which is passed to the model which will invoke it (the iterator) to get the next batch of images when needed during the training steps in each epoch.
 
 Aligning the model batch size with the iterator batch size avoids unnecessary calls and more importantly tunes memory usage while training the models.
 

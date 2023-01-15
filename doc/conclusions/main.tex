@@ -16,15 +16,15 @@ The project timeline was a little short to execute some additional experiments t
 
 It looks the right decision to have taken the opportunity to train VAEs for image creation rather than using Autoencoders to reconstruct existing images since VAEs were not only capable of that but also of creating new images from the latent space. Using Autoencoders would have required less efforts in research while focusing on tuning model results from previous existing and documented projects.
 
-Using Google Colab and Keras library proved to be the right tools to use, both of them boosted the project thanks to the community behind who have created reference projects to implement new VAE and VQ-VAE classes for models. The downside of using Colab is that free GPUs are very limited to this kind of project and even when using the PRO+ subscription, paid unites lasted for 2 days. Maybe for this kind of projects, dedicated VMs would be used to not block the project activities.
+Using Google Colab and Keras library proved to be the right tools to use, both of them boosted the project thanks to the community behind who have created reference projects to implement new VAE and VQ-VAE classes for models. The downside of using Colab is that free GPUs are very limited to this kind of project even when using the PRO+ subscription, paid unites lasted for 2 days. Maybe for this kind of projects, dedicated VMs should be used to not block the project activities.
 
 \section{Future Work}
 
-As described in conclusions, this thesis outcomes just prove that VAEs and VQ-VAEs are learning from the dataset but the cannot create real images today. To reach that goal, several future works are foreseen.
+As described in conclusions, this thesis outcomes prove that VAEs and VQ-VAEs are learning from the dataset but that they cannot create real images today. To reach that goal, several future works are foreseen.
 
 If the project sticks to use \GLSname{ixi} dataset and work with 2D slices, the images should be intensively processed by applying skull stripping and, at least, adding noise and centering images as pre-processing techniques that might improve the dataset quality.
 
-Clearly, the KL-Divergence issue has to be cleared out. Maximizing ELBOs require to minimize both reconstruction loss and kl-divergence, it is not an option to let kl-divergence to increase. Another related task is to work on the formula that aggregates reconstruction loss and kl-divergence as training loss. Maybe applying factors is needed. 
+Clearly, the KL-Divergence issue has to be cleared out. Maximizing ELBOs require to minimize both reconstruction loss and KL-divergence, it is not an option to let KL-divergence to increase. Another related task is to work on the formula that aggregates reconstruction loss and KL-divergence as training loss. Maybe applying factors is needed. 
 
 Talking about losses, a nice-to-have task is to be able to mark which are the values that are acceptable. For example, in case of reconstruction loss, a loss of 0 means that images are identical, but what does mean a loss of 30? or a loss of 100? If acceptable losses can be determined the expert eye would not be required to declare a model as good or bad.
 

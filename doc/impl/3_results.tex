@@ -58,13 +58,13 @@ Looking at technical results, the models seem to learn very slowly but they keep
 
 \subsubsection{Experiments}
 
-The project implementation methodology followed determined that after every task a fast status analysis was assessed. The reason to do so was the research nature of the project that required continuous evalution on the process and results.
+The project methodology determined that after every task a fast status analysis was assessed. The reason to do so was the research nature of the project that required continuous evalution on the process and results.
 
 Most of the experiments were executed during the creation of images phase. Whereas the resulting pre-process tasks were overall clear due to  \acrshort{mri} slices deep study, executed at the analysis phase of the project, the creation of images required analysis and implementation cycles since at the analysis phase of the project VAEs' theory was checked but the implementation tasks were not.
 
-Instead of creating it from scratch, a simple \acrfull{cnn} that is used to show VAE example on MNIST \cite{mnist} digits was picked. It was only used to test the code functionality only, results were not important and they were discarded. 
+Instead of creating it from scratch, a simple \acrfull{cnn} that is used to show VAE example on MNIST \cite{mnist} digits was picked. It was used to test the code functionality only, results were not important and they were discarded. 
 
-Once that the functionality was proved to work, the 5-block network was implemented with the following features (details only the ones that vary from the final model):
+Once that the functionality was proved to work, the 5-block network was implemented with the following features (it details only the features that vary from the final model):
 
 \begin{itemize}
     \item 128, 64, 32, 16 and 8 dimensions and a latent space of 200
