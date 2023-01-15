@@ -6,7 +6,7 @@ The aim of this project was to serve as a Proof of Concept on how MRI brain imag
 
 According to the original aim of the project, it can be concluded that, as a Proof of Concept, Variational Autoencoders can create images artificially. This project requires to be continued so that those created images could be interpreted as real by an expert eye.
 
-Training the different models and convolutional networks with also different parameters, produced similar images. That leads to conclude that maybe the IXI dataset was too small or that the selected approach to decide which images to pre-process and use was not the best. While thesis' dataset generated (and used) ~16k images, BraTS \cite{brats} uses ~165k, ten times more images for anomaly detection models. So, it is clear that the number of images used in this project is far from being appropiate.
+Training the different models and convolutional networks with also different parameters, produced similar images. That leads to conclude that maybe the \GLSname{ixi} dataset was too small or that the selected approach to decide which images to pre-process and use was not the best. While thesis' dataset generated (and used) ~16k images, BraTS \cite{brats} uses ~165k, ten times more images for anomaly detection models. So, it is clear that the number of images used in this project is far from being appropiate.
 
 The models were able to create images that overall can be seen as brain images in terms of sizes and forms, but the brains are not detailed, instead, they look blurred. This is the main area of improvement and were a second phase of the project should focus.
 
@@ -22,10 +22,10 @@ Using Google Colab and Keras library proved to be the right tools to use, both o
 
 As described in conclusions, this thesis outcomes just prove that VAEs and VQ-VAEs are learning from the dataset but the cannot create real images today. To reach that goal, several future works are foreseen.
 
-If the project sticks to use IXI dataset and work with 2D slices, the images should be intensively processed by applying skull stripping and, at least, adding noise and centering images as pre-processing techniques that might improve the dataset quality.
+If the project sticks to use \GLSname{ixi} dataset and work with 2D slices, the images should be intensively processed by applying skull stripping and, at least, adding noise and centering images as pre-processing techniques that might improve the dataset quality.
 
 Clearly, the KL-Divergence issue has to be cleared out. Maximizing ELBOs require to minimize both reconstruction loss and kl-divergence, it is not an option to let kl-divergence to increase. Another related task is to work on the formula that aggregates reconstruction loss and kl-divergence as training loss. Maybe applying factors is needed. 
 
 Talking about losses, a nice-to-have task is to be able to mark which are the values that are acceptable. For example, in case of reconstruction loss, a loss of 0 means that images are identical, but what does mean a loss of 30? or a loss of 100? If acceptable losses can be determined the expert eye would not be required to declare a model as good or bad.
 
-In case that the IXI dataset could be extended with other MRI datasets, for instance BraTS \cite{brats}, the models should be trained with them first, and then with both. Exploring results with larger datasets is key to test the implemented VAE and VQ-VAE models' quality.
+In case that the \GLSname{ixi} dataset could be extended with other MRI datasets, for instance BraTS \cite{brats}, the models should be trained with them first, and then with both. Exploring results with larger datasets is key to test the implemented VAE and VQ-VAE models' quality.

@@ -1,6 +1,6 @@
 \section{MR Images and datasets}
 
-The \GLSname{ixi} dataset is published at brain-development.org website from Imperial College London and it is the chosen dataset for this project. IXI dataset is a collection of 600 Brain MR Images, in 3-D, collected from 3 different hospitals in London. The images are scanned in 1.5 and 3 Tesla which is the range of the quality that we could usually find in hospitals around the world. Scanners with higher quality (7T) are very rare in the world and so working with this dataset makes sense if you plan to export your work to real production environments.
+The \GLSname{ixi} dataset is published at brain-development.org website from Imperial College London and it is the chosen dataset for this project. \GLSname{ixi} dataset is a collection of 600 Brain MR Images, in 3-D, collected from 3 different hospitals in London. The images are scanned in 1.5 and 3 Tesla which is the range of the quality that we could usually find in hospitals around the world. Scanners with higher quality (7T) are very rare in the world and so working with this dataset makes sense if you plan to export your work to real production environments.
 
 The images are stored as volumes or 3-D images which require an intense computational effort to process, in this project we will work with 2-D images, or brain slices, which will allow us to scale the number of samples that our model will work with.
 
@@ -8,12 +8,12 @@ Other datasets exist on the internet which can be used for this project, and of 
 
 The one sponsored by Facebook AI and hosted at NYU Langone Health is called fastMRI and includes knees and brain MRIs. Nothing better than its overview to describe the aim of this dataset “fastMRI is a collaborative research project from Facebook AI Research (FAIR) and NYU Langone Health to investigate the use of AI to make MRI scans faster”. 
 
-The dataset consists of 6.970 fully sampled MRI brain images obtained in 3 and 1.5 Tesla magnets like the IXI dataset and includes T1, T2 and FLAIR images.
+The dataset consists of 6.970 fully sampled MRI brain images obtained in 3 and 1.5 Tesla magnets like the \GLSname{ixi} dataset and includes T1, T2 and FLAIR images.
 
-We can also find Brain Tumor Segmentation (BraTS) challenge \cite{brats} which encloses two different tasks of brain tumor detection and classification. The challenge is 10+ years old and as of 2021 provided 2.000 cases with 8.000 MRI scans. Like fastMRI, BraTS provides T1, T2 and FLAIR images in NIFTI files.
+We can also find Brain Tumor Segmentation (BraTS) challenge \cite{brats} which encloses two different tasks of brain tumor detection and classification. The challenge is 10+ years old and as of 2021 provided 2.000 cases with 8.000 MRI scans. Like fastMRI, BraTS \cite{brats} provides T1, T2 and FLAIR images in NIFTI files.
 
-BraTS dataset has been pre-processed prior to its release, i.e., co-registered to the same anatomical template, interpolated to the same resolution and skull-stripped.
+BraTS \cite{brats} dataset has been pre-processed prior to its release, i.e., co-registered to the same anatomical template, interpolated to the same resolution and skull-stripped.
 
-In conclusion, IXI dataset, which includes a spreadsheet of democratization of the dataset, could be enlarged with BraTS or fastMRI for further research (with the corresponding pre-process alignment).
+In conclusion, \GLSname{ixi} dataset, which includes a spreadsheet of democratization of the dataset, could be enlarged with BraTS \cite{brats} or fastMRI for further research (with the corresponding pre-process alignment).
 
 Since the project aims to create artificial images that could be used with real images to train specific models, using them with different datasets would be interesting for validating the portability of the created images to different hospitals. 
