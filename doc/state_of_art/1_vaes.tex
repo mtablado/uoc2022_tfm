@@ -10,15 +10,23 @@ The history of Variational Autoencoders could be summarised by sequentially look
 
 The first paper must be used to understand the differences between Autoencoders and Variational Autoencoders. This is important since VAE can be interpreted as a new technique with origin on Autoencoders, thus, sharing fundamentals and architectures.
 
-An and Cho \cite{ancho}, described a VAE as "a probabilistic graphical model that combines variational inference with deep learning”. Because VAE reduces dimensions in a probabilistically sound way, theoretical foundations are firm. The advantage of a VAE over an autoencoder and a \acrshort{pca} is that it provides a probability measure rather than a reconstruction error as an anomaly score, which we will call the reconstruction probability. Probabilities are more principled and objective than reconstruction errors and does not require model specific thresholds for judging anomalies."
+An and Cho \cite{ancho}, described a VAE as 
 
-In other words, Jeremy Jordan \cite{jjordan} describes the same in simpler words "A variational autoencoder provides a probabilistic manner for describing an observation in latent space. Thus, rather than building an encoder which outputs a single value to describe each latent state attribute, we'll formulate our encoder to describe a probability distribution for each latent attribute.".
+\begin{quote}
+    "A probabilistic graphical model that combines variational inference with deep learning. Because VAE reduces dimensions in a probabilistically sound way, theoretical foundations are firm. The advantage of a VAE over an autoencoder and a \acrshort{pca} is that it provides a probability measure rather than a reconstruction error as an anomaly score, which we will call the reconstruction probability. Probabilities are more principled and objective than reconstruction errors and does not require model specific thresholds for judging anomalies."    
+\end{quote}
+
+In other words, Jeremy Jordan \cite{jjordan} describes the same in simpler words 
+
+\begin{quote}
+    "A variational autoencoder provides a probabilistic manner for describing an observation in latent space. Thus, rather than building an encoder which outputs a single value to describe each latent state attribute, we'll formulate our encoder to describe a probability distribution for each latent attribute."
+\end{quote}
 
 \begin{figure}[ht]
     \hspace*{-1in}
     \centering
     \includegraphics[width = 17cm, height = 8cm]{images/vaes.png}
-    \caption[]{Variational Autoencoders by Jerermy Jordan \cite{jjordan}}
+    \caption[Variational Autoencoders by Jerermy Jordan]{Variational Autoencoders by Jerermy Jordan \cite{jjordan}}
     \label{fig:vaes}
 \end{figure}
 

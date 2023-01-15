@@ -9,40 +9,47 @@ The described implemented architecture of VAE and VQ-VAE models results show tha
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 17cm]{images/mri-real-images.png}
-    \caption[]{Real MR Images}
+    \caption[Real MR Images]{Real MR Images}
     \label{fig:mri-real-images}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 17cm]{images/vae-brains-results.png}
-    \caption[]{VAE Predicted Images}
-    \label{fig:vae-k3-brains-30-epochs}
+    \caption[VAE Reconstructed Images]{VAE Reconstructed Images}
+    \label{fig:vae-brains-results}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 17cm]{images/vqvae-brains-results.png}
-    \caption[]{VQ-VAE Predicted Images}
-    \label{fig:vae-k3-brains-30-epochs}
+    \caption[VQ-VAE Reconstructed Images]{VQ-VAE Reconstructed Images}
+    \label{fig:vqvae-brains-results}
 \end{figure}
 
-Predicted images are slices that were created using the output of the encoder as the decoder input not artificially generated. Note that real images shown in Figure \ref{fig:mri-real-images} do not correlate to other images, they are just random samples.
+Reconstructed images are slices that were created using the test data. They were created using the output of the encoder as the decoder input not artificially generated.
+
+Note that real images shown in Figure \ref{fig:mri-real-images} do correlate with images shown in Figures \ref{fig:vae-brains-results} and \ref{fig:vqvae-brains-results}.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 17cm]{images/vae-brains-results-from-latent-space.png}
-    \caption[]{Artificial VAE images created from latent space}
-    \label{fig:vae-k3-brains-30-epochs}
+    \caption[Artificial VAE images created from latent space]{Artificial VAE images created from latent space}
+    \label{fig:vae-images-from-latent-space}
 \end{figure}
 
 Looking at technical results, the models seem to learn very slowly but they keep learning even at 500 epochs so the models' limits are yet to be discovered. On the other hand, as explained in dedicated section, VAE model shows an issue with the KL Divergence, it becomes higher over epochs while it must be decreased.
 
 \begin{figure}[ht]
-    \includegraphics[width = 8cm]{images/vae-loss-results.png}
-    \includegraphics[width = 8cm]{images/vqvae-loss-results.png}
-    \caption[]{VAE and VQ-VAE Training loss}
-    \label{fig:vae-and-vqvae-training-loss}
+    \includegraphics[width = 17cm]{images/vae-loss-results.png}
+    \caption[VAE Training loss]{VAE Training loss}
+    \label{fig:vae-training-loss}
+\end{figure}
+
+\begin{figure}[ht]
+    \includegraphics[width = 17cm]{images/vqvae-loss-results.png}
+    \caption[VQ-VAE Training loss]{VQ-VAE Training loss}
+    \label{fig:vqvae-training-loss}
 \end{figure}
 
 
@@ -71,32 +78,30 @@ Producing the images shown in Figure \ref*{fig:vae-k3-brains-30-epochs} and loss
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 17cm]{images/vae-k3-brains-30-epochs.png}
-    \caption[]{VAE Results on experiments I}
+    \caption[VAE Results on experiments I]{VAE Results on experiments I}
     \label{fig:vae-k3-brains-30-epochs}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 14cm, height=8cm]{images/vae-k3-loss-30-epochs.png}
-    \caption[]{VAE Losses on experiments I}
+    \caption[VAE Losses on experiments I]{VAE Losses on experiments I}
     \label{fig:vae-k3-loss-30-epochs}
 \end{figure}
 
-At that time, since results on images were not ideal the new approach was created in order to double-check if the kl-divergence issue could the reason for not getting better results. A VQ-VAE implementation was created along with an extra sixth layer added at the begining of the encoder, looking for a slower learning approach.
-
-Producing the images shown in Figure \ref*{fig:vqvae-6layers-30-epochs} and losses shown in Figure \ref*{fig:vqvae-6layers-loss-30-epochs}
+At that time, since results on images were not ideal the new approach was created in order to double-check if the kl-divergence issue could be the reason for not getting better results. A VQ-VAE implementation was created along with an extra sixth layer added at the begining of the encoder, looking for a slower learning approach. The VQ-VAE implementation with 6 layers produced the images shown in Figure \ref*{fig:vqvae-6layers-30-epochs} and losses shown in Figure \ref*{fig:vqvae-6layers-loss-30-epochs}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 17cm]{images/vqvae-6layers-30-epochs.png}
-    \caption[]{VQ-VAE Results on experiments II}
+    \caption[VQ-VAE Results on experiments II]{VQ-VAE Results on experiments II}
     \label{fig:vqvae-6layers-30-epochs}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 14cm, height=8cm]{images/vqvae-6layers-loss-30-epochs.png}
-    \caption[]{VQ-VAE Losses on experiments II}
+    \caption[VQ-VAE Losses on experiments II]{VQ-VAE Losses on experiments II}
     \label{fig:vqvae-6layers-loss-30-epochs}
 \end{figure}
 
@@ -107,14 +112,14 @@ VAE Produced the images shown in Figure \ref*{fig:vae-brains-128pixels-200epochs
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 17cm]{images/vae-brains-128pixels-200epochs.png}
-    \caption[]{VAE Results on experiments III}
+    \caption[VAE Results on experiments III]{VAE Results on experiments III}
     \label{fig:vae-brains-128pixels-200epochs}
 \end{figure}
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 14cm, height=8cm]{images/vae-loss-128pixels-200epochs}
-    \caption[]{VAE Losses on experiments III}
+    \caption[VAE Losses on experiments III]{VAE Losses on experiments III}
     \label{fig:vae-loss-128pixels-200epochs}
 \end{figure}
 

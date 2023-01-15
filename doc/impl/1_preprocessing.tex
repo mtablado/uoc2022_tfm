@@ -2,9 +2,9 @@
 
 \subsubsection*{NIFTI protocol}
 
-The NIFTI protocol stores the MRI scan images in 3D format with spatial information that allows the doctors to analyze images knowing the orientation along with some other metadata. Data is stored in vector-based fashion with voxel information.
+The NIFTI protocol stores the MRI scan images in 3D format with spatial information that allows the doctors to analyze images knowing the orientation along with some other metadata. Data is stored as vectors with voxel information, so the voxel is stored with its magnitude and its direction.
 
-This project is using the \cite{nibabel} library to load and process MRI images from nifti files. The library loads nifti files and retrieves an in-memory object with the image data containing slices in a 3-dimensional array. Accessing slices is then as easy as using the three indexes in the array, where you can easily get a slice by using the slice number from your chosen axis.
+This project is using the nibabel \cite{nibabel} library to load and process MRI images from NIFTI files. The library loads NIFTI files and retrieves an in-memory object with the image data containing slices in a 3-dimensional array. Accessing slices is then as easy as using the three indexes in the array, where you can easily get a slice by using the slice number from your chosen axis.
 
 \subsubsection*{Loading images}
 Extract 2D images: Load 3D images and extract 2D slices from the original dataset, which will be depicted with code.
@@ -14,7 +14,7 @@ After loading NIFTI images with the nibabel library \dots
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 10cm, height = 6cm]{images/3-axis.png}
-    \caption[]{Coronal, Axial and Sagittal images}
+    \caption[Coronal, Axial and Sagittal images]{Coronal, Axial and Sagittal images}
     \label{fig:3-axis}
 \end{figure}
 
@@ -35,7 +35,7 @@ While observing the BraTS \cite{brats} challenge dataset and project description
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 10cm, height = 6cm]{images/skull-stripped.png}
-    \caption[]{Skull stripped image example; Source: Analytics Vidhya \cite{skullstripping} }
+    \caption[Skull stripped image example]{Skull stripped image example; Source: Analytics Vidhya \cite{skullstripping} }
     \label{fig:skullstripped}
 \end{figure}
 
@@ -50,7 +50,7 @@ Figure \ref*{fig:slice160} shows a red line which bottom-up delimits  the range 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 10cm, height = 6cm]{images/nifti-slice160.png}
-    \caption[]{In red, slice 160 as bottom delimiter}
+    \caption[Slice 160 as bottom delimiter]{In red, slice 160 as bottom delimiter}
     \label{fig:slice160}
 \end{figure}
 
@@ -59,7 +59,7 @@ Also, the slices closer to the top were also discarded to avoid higher heterogen
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 10cm, height = 6cm]{images/nifti-slice190.png}
-    \caption[]{In red, slice 190 as top delimiter}
+    \caption[Slice 190 as top delimiter]{In red, slice 190 as top delimiter}
     \label{fig:slice190}
 \end{figure}
 
@@ -87,7 +87,7 @@ Also, data augmentation techniques that could result on unpredictable latent spa
         Add Noise & Declined & Adding noise is interesting for improving results and key to allow model transfering to other datasets obtained with different scanners and their settings or image quality. It was declined due to time constraints. \\
         \hline
     \end{tabular}
-    \caption{Pre-processing techniques decissions table}
+    \caption{Pre-processing techniques decisions table}
     \label{table:preprocessing}
 \end{table}
 
@@ -99,3 +99,5 @@ Also, data augmentation techniques that could result on unpredictable latent spa
 In order to separate image loading from model training into different steps, selected 2D images are stored in \acrshort{png} format after being pre-processed. 
 
 The images are stored in 2 different directories spliting the dataset into 90\% for training and 10\% for test subsets resulting in 16.268 and 1.162 images respectively.
+
+This process is slow due to the need of intensive disk writing operations. Saving ~16k images at Google Drive lasts for about 15 minutes. As a consequence, images were stored with original 256 pixels so that they could be scaled down to 128 or less if needed. Creating different directories with images stored in different sizes would waste around 2.5 Gigabytes per sizing.

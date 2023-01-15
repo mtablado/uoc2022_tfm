@@ -7,7 +7,7 @@ The source code of the implemented VAE can be found at \href{https://github.com/
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 16cm, height = 6cm]{images/vae.png}
-    \caption[]{Diagram of Implemented VAE Architecture}
+    \caption[Diagram of Implemented VAE Architecture]{Diagram of Implemented VAE Architecture}
     \label{fig:vaearch}
 \end{figure}
 
@@ -20,7 +20,7 @@ Encoder output vectors are:
     \item a 1024-dimensional vector of standard deviations (z) as $log(z)$ to make sure they are positive.
 \end{itemize}
  
-Then those vectors are sampled and feeded into the decoder to reconstruct the \acrshort{mri}. Backpropagation is applied to correct latent space issues and let the model be more accurate.
+Then those vectors are sampled and fed into the decoder to reconstruct the \acrshort{mri}. Backpropagation is applied to correct latent space issues and let the model be more accurate.
 
 To implement above architecture in Keras, a new model was created by overriding the Keras Model abstract class and implementing the methods that the interface requires. So, specific methods are coded to process each and every train step and the metrics property is overriden to store the training loss, the reconstruction loss and the Kullback-Leibler divergence data.
 
@@ -62,7 +62,7 @@ The source code of this section can be found at \href{https://github.com/mtablad
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 16cm, height = 8cm]{images/vq-vae.png}
-    \caption[]{Diagram of Implemented VQ-VAE Architecture}
+    \caption[Diagram of Implemented VQ-VAE Architecture]{Diagram of Implemented VQ-VAE Architecture}
     \label{fig:vqvaearch}
 \end{figure}
 
@@ -94,7 +94,7 @@ Figure \ref{fig:cnnencoderoutput} shows the encoder model summary output after c
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 14cm, height = 8cm]{images/cnn-encoder-output.png}
-    \caption[]{CNN Encoder model summary output}
+    \caption[CNN Encoder model summary output]{CNN Encoder model summary output}
     \label{fig:cnnencoderoutput}
 \end{figure}
 
@@ -105,7 +105,7 @@ Figure \ref{fig:cnndecoderoutput} shows the decoder model summary output after c
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 14cm, height = 8cm]{images/cnn-encoder-output.png}
-    \caption[]{CNN Decoder model summary output}
+    \caption[CNN Decoder model summary output]{CNN Decoder model summary output}
     \label{fig:cnndecoderoutput}
 \end{figure}
 
@@ -116,7 +116,7 @@ Both of the above-described VAE and VQ-VAE models use this network architecture 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 14cm, height = 12cm]{images/cnn-vae-encoder-output.png}
-    \caption[]{CNN VAE encoder model summary output}
+    \caption[CNN VAE encoder model summary output]{CNN VAE encoder model summary output}
     \label{fig:cnnvaeencoderoutput}
 \end{figure}
 
@@ -125,7 +125,7 @@ Both of the above-described VAE and VQ-VAE models use this network architecture 
 \begin{figure}[ht]
     \centering
     \includegraphics[width = 14cm, height = 12cm]{images/cnn-vqvae-encoder-output.png}
-    \caption[]{CNN VQ-VAE encoder model summary output}
+    \caption[CNN VQ-VAE encoder model summary output]{CNN VQ-VAE encoder model summary output}
     \label{fig:cnnvqvaeencoderoutput}
 \end{figure}
 
@@ -137,7 +137,7 @@ As described in this section, the implemented \acrshort{cnn} is based on Context
     For the encoder and decoder networks, we chose fully convolutional networks with five 2D-Conv-Layers and 2D-Transposed-Conv-Layers respectively with CoordConv, kernel size 4 and stride 2, each layer followed by a Leaky-ReLU non-linearity. The encoder and decoder are symmetric with 16, 64, 256, 1024 feature maps and a latent variable size of 1024
 \end{quote}
 
-In project's \acrfull{cnn}, a Normalization neuron is added between them resulting in the following composite:
+In project's \acrfull{cnn}, a Normalization layer is added between them resulting in the following composite:
 
 \begin{itemize}
     \item Convolutional neuron (Conv2D or Conv2DTranspose) 
@@ -147,18 +147,45 @@ In project's \acrfull{cnn}, a Normalization neuron is added between them resulti
 
 The convolutional layer is paremetrized with 4 kernels, stride 2 and padding 0. The kernel size aims to avoid the network learning too fast, while using stride 2 to lower the training resources needed and train faster.
 
-According to Martin Riva \cite{batchnorm} "Batch Norm is a normalization technique done between the layers of a Neural Network instead of in the raw data. It is done along mini-batches instead of the full data set. It serves to speed up training and use higher learning rates, making learning easier. the standard deviation of the neurons' output.". The project is loading raw data in batches which are normalized as a preparation step, however, normalizing data between each layer might help.
+According to Martin Riva \cite{batchnorm} "Batch Norm is a normalization technique done between the layers of a Neural Network instead of in the raw data. It is done along mini-batches instead of the full data set. It serves to speed up training and use higher learning rates, making learning easier. The standard deviation of the neurons' output.". The project is loading raw data in batches which are normalized as a preparation step, however, normalizing data between each layer might help.
 
-ReLu neuron is usually applied in Deep Learning (and so it is in the project) right after every convolutional neuron to remove linearity since, basically, all the previous operations are linear. 
+ReLu activation is usually applied in Deep Learning (and so it is in the project) right after every convolutional layer to remove linearity since, basically, all the previous operations are linear. 
 
 \subsection{Flow from directory}
 
-An interesting implemented feature is the ability to use an interator for image loading which is in fact called by the VAE and VQ-VAE models. So that in each iteration a batch of images is loaded in memory and ready to be used within the model.
+When working with large image datasets data cannot be loaded in memory and then passed to the model for training. Instead, data is required to be processed in batches to alleviate the need of compute resources.
+
+To do so, Keras provides the \href{https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator#flow_from_directory}{Flow from directory} method which allows you to configure data loading parameters and several pre-processing actions.
+
+Once configured, the flow from directory method retrieves an iterator object, which is passed to the model which will invoke it to get the next batch of images when needed during the training steps in each epoch.
 
 Aligning the model batch size with the iterator batch size avoids unnecessary calls and more importantly tunes memory usage while training the models.
 
-The flow from directory method is also the responsible to downsample pixeling since images are stored with 256 and the model expects only 128.
+The method was paremetrized to rescale the pixels from original 256 to final 128. Training and testing images were extracted from NIFTI files and stored in \acrshort{png} format with original size so that they could be resized as desired at this stage. This configuration allowed the project to experiment with both sizes much easier.
 
 \subsection{Creating artificial images from latent space}
-
+\label{sec:generate-images}
 To create artificial images from the latent space the decoder input must be generated. As explained, the decoder expects an object from the latent space, which means that 1024 values are expected in the normal Gaussian distribution. This is randomly generated with NumPy library and its \href{https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html}{numpy.random.normal} function.
+
+In figure \ref{fig:vaes}, samples are created from 6 variables, each of them corresponding to a learnt feature. Two different images are shown created from 2 different samples, yellow and red ones. Yellow and red points shown in the image (inside "Latent distributions") could have perfectly been created as described in the previous paragraph.
+
+In this project, the 1024 generated values are equivalent to those yellow and red points and they define the small variations on brain features that will be used when creating the new image; refer to diagram \ref{fig:image-from-latent-space-diagram} for a clear representation of the pipeline.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width = 14cm]{images/tfm-vae-latent-space.png}
+    \caption[Image created from latent space]{Image created from latent space}
+    \label{fig:image-from-latent-space-diagram}
+\end{figure}
+
+\subsection{Image reconstruction}
+
+Once that VAE and \acrshort{vqvae} models are created, test images are used for testing purposes.
+
+Testing an image process requires to encode and decode it. When encoding an image, the encoder will create a vector of values (z) which will be passed to the decoder to be reconstructed with the formula:
+
+\begin{equation}
+    z = \mu  + e^{(0,5 * \sigma)} * random(vector)
+\end{equation}
+
+The random vector is generated with the same method used for creating images from latent space (see section \ref{sec:generate-images}). Hence, image reconstruction is very similar to images created from latent space with the difference that the random values are influenced by the means and variance of the model.
